@@ -1,0 +1,91 @@
+1.#install protoc-
+
+Download protoc-3.17.1-win64.zip from: https://github.com/protocolbuffers/protobuf/releases 
+Extract zip to c:\Tools\protoc # and add c:\Tools\protoc\bin to PATH
+
+Protoc/Protocol Buffers (Protobuf) is a free and open source cross-platform library used to serialize structured data for our proposed work. It is useful in developing programs to communicate with each other over a network or for storing data. The method involves an interface description language that describes the structure of some data and a program that generates source code from that description for generating or parsing a stream of bytes that represents the structured data.
+
+2. #install cudnn toolkit and cuda 
+
+The NVIDIA® CUDA® Deep Neural Network library™ (cuDNN) is a GPU-accelerated library of primitives for deep neural networks. cuDNN provides highly tuned implementations for standard routines such as forward and backward convolution, pooling, normalization, and activation layers.
+
+For our proposed work if we have an NVIDIA graphics card instead of intel, we need to install both Cuda and cudnn toolkit so that the image processing libraries we used are compatible with the graphics card.This allows us to train the machine model at a faster pace as well.
+
+3.create env: sign_detect
+
+Here we create an enviornment called sign_detect in the anaconda command prompt and activate it using the command-
+
+>conda activate sign_detect
+once we have activated the enviornment,we install various libraries like -
+
+a)pip install cython: The Cython language makes writing C extensions for the Python language as easy as Python itself. Cython is a source code translator based on Pyrex, but supports more cutting edge functionality and optimizations.
+
+Hence we use cython to convert all c++ code into python code.This makes Cython the ideal language for writing glue code for external C/C++ libraries which we used, and for fast C modules that speed up the execution of Python code.
+
+b)pip install numpy==1.19.5
+
+NumPy can be used as an efficient multi-dimensional container of generic data. Arbitrary data-types can also be defined. This allows NumPy to seamlessly and speedily integrate with a wide variety of databases for our proposed work.
+It provides:
+
+a powerful N-dimensional array object
+sophisticated (broadcasting) functions
+tools for integrating C/C++ code
+useful linear algebra, Fourier transform, and random number capabilities,etc.
+
+c)pip install pandas
+
+pandas is a Python package that provides fast, flexible, and expressive data structures designed to make working with structured (tabular, multidimensional, potentially heterogeneous) and time series data both easy and intuitive. It aims to be the fundamental high-level building block for doing practical, real world data analysis in Python.
+Here are the things that pandas are used for in our proposed work:
+
+Easy handling of missing data (represented as NaN) in floating point as well as non-floating point data
+Size mutability: columns can be inserted and deleted from DataFrame and higher dimensional objects
+Automatic and explicit data alignment: objects can be explicitly aligned to a set of labels, or the user can simply ignore the labels and let Series, DataFrame, etc. automatically align the data for you in computations
+Powerful, flexible group by functionality to perform split-apply-combine operations on data sets, for both aggregating and transforming data
+Make it easy to convert ragged, differently-indexed data in other Python and NumPy data structures into DataFrame objects
+Intelligent label-based slicing, fancy indexing, and subsetting of large data sets
+Intuitive merging and joining data sets
+Flexible reshaping and pivoting of data sets
+Hierarchical labeling of axes (possible to have multiple labels per tick)
+Robust IO tools for loading data from flat files (CSV and delimited), Excel files, databases, and saving / loading data from the ultrafast HDF5 format
+Time series-specific functionality: date range generation and frequency conversion, moving window statistics, date shifting and lagging.
+
+d)pip install git+https://github.com/philferriere/cocoapi.git#subdirectory=PythonAPI
+
+This is done to install cocoapi tools from github directly.
+COCO provides multi-object labeling, segmentation mask annotations, image captioning, key-point detection and panoptic segmentation annotations with a total of 81 categories, making it a very versatile and multi-purpose dataset.
+This is used in our proposed work to for image detection,labelling and matching with our database hence performing the core functions of the project. 
+
+#conda install -c conda-forge pycocotools  (only for linux)
+
+4. cd %HOMEPATH%/Downloads/RealTimeObjectDetection/TensorFlow/models/research/
+   protoc object_detection/protos/*.proto --python_out=.
+   copy  object_detection\packages\tf2\setup.py .
+
+This is done to copy the object_detection\packages\tf2\setup.py folder into the object_detection/protos/*.proto --python_out file to allow the setup installation file for object detection to take place.
+
+5.install Tensorflow and object detection API
+
+Install the TensorFlow PIP packageL: pip install --ignore-installed --upgrade tensorflow==2.2.0
+
+cd TensorFlow/models/research/ :
+
+cp object_detection/packages/tf2/setup.py .
+python -m pip install .
+
+
+These commands are used to install Tensorflow 2.2.0 in our enviornment and download the object detection API in the research folder of RealTimeOject folder and ready the setup file along with installing all necessary python libraries.
+
+python -m pip install .  #uses tensorflow 2.5.0 -> (removes earlier tensorflow 2.3.0) 
+
+7.Once we execute the code in our python file to train the system with specified number of steps, we get some lines of code-
+
+python Tensorflow/models/research/object_detection/model_main_tf2.py --model_dir=Tensorflow/workspace/models/my_ssd_mobnet --pipeline_config_path=Tensorflow/workspace/models/my_ssd_mobnet/pipeline.config --num_train_steps=3000
+
+This code is copied into our command prompt inside our RealTimeObjectDetection to train our model to detect the sign language by using the datasets saved into our train folder.
+After this is done we can then see the output of our work.
+
+
+
+
+
+
