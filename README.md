@@ -19,3 +19,5 @@ Programming Languages: Python 3.6
 Server: Apache2
 
 The purpose of this project is to take real time images through a video of a sign language user and provide the translation in the form of a text with labelling immediately.Vice versa also possiple.
+
+(view the 2 .ipynb files for the project code)
